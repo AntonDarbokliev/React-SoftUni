@@ -2,7 +2,8 @@ import Todo from "./Todo.js";
 
 
 export default function TodoList({ 
-  todos 
+  todos,
+  toggleStatus
 }) {
   return (
     <table className="table">
@@ -14,7 +15,7 @@ export default function TodoList({
         </tr>
       </thead>
       <tbody>
-        {todos.map((todo) => <Todo {...todo} />)}
+        {todos.map((todo) =>  <Todo key= {todo._id} {...todo} toggleStatus = {toggleStatus} />)}
         
       </tbody>
     </table>
