@@ -3,17 +3,49 @@ import { User } from "./User.jsx";
 import { UserDetails } from "./UserDetails";
 
 import * as userService from "../services/userService.js";
-export const UserList = ({ users }) => {
+import { CreateEdit } from "./CreateEdit.jsx";
+export const UserList = ({ 
+  users
+ }) => {
   const [selectedUser, setSelectedUser] = useState(null);
+  const [showAddUser, setShowAddUser] = useState(null);
 
   const onInfoClick = async (userId) => {
     const user = await userService.getOne(userId);
 
     setSelectedUser(user);
   };
+
+  const onAddShow = () => {
+    setShowAddUser(true)
+  }
+
+  const onSave = async (e,firstName,lastName,email,phoneNumber,imageUrl,country,city,street,streetNumber) => {
+    e.preventDefault()
+    const data = {
+      firstName,
+      lastName,
+      email,
+      phoneNumber,
+      imageUrl,
+      address: {
+        country,
+        city,
+        street,
+        streetNumber
+      }
+    }
+    await userService.create(data)
+  }
+
+  const onClose = () => {
+    setSelectedUser(null)
+    setShowAddUser(null)
+  }
   return (
     <>
-      {selectedUser && <UserDetails {...selectedUser}/>}
+      {selectedUser && <UserDetails {...selectedUser} onClose={onClose}/>}
+      {showAddUser && <CreateEdit onClose={onClose} onSave = {onSave}/>}
       {/* Table component */}
       <div className="table-wrapper">
         {/* Overlap components  */}
@@ -183,6 +215,8 @@ export const UserList = ({ users }) => {
           </tbody>
         </table>
       </div>
+      <button className="btn-add btn" onClick={onAddShow}>Add new user</button>
+
     </>
   );
 };
