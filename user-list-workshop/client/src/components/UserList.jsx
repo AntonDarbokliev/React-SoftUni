@@ -13,7 +13,7 @@ export const UserList = ({ users }) => {
   };
   return (
     <>
-      {selectedUser && <UserDetails />}
+      {selectedUser && <UserDetails {...selectedUser}/>}
       {/* Table component */}
       <div className="table-wrapper">
         {/* Overlap components  */}
