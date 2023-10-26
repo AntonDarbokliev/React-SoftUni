@@ -1,10 +1,12 @@
 export const User = ({
+    _id,
     firstName,
     lastName,
     email,
     createdAt,
     imageUrl,
-    phoneNumber
+    phoneNumber,
+    onInfoClick
 
 }) => {
   return (
@@ -56,7 +58,7 @@ export const User = ({
                 ></path>
               </svg>
             </button>
-            <button className="btn info-btn" title="Info">
+            <button className="btn info-btn" title="Info" onClick={() => onInfoClick(_id)}>
               <svg
                 aria-hidden="true"
                 focusable="false"
