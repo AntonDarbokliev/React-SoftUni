@@ -28,5 +28,5 @@ export const create = async (data) => {
 
     console.log(result);
 
-    return result
+    return result.user
 }

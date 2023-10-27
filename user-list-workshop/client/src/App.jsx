@@ -17,13 +17,42 @@ function App() {
       })
   }, []);
 
+
+  const onSave = async (e,firstName,lastName,email,phoneNumber,imageUrl,country,city,street,streetNumber) => {
+    e.preventDefault()
+    const data = {
+      firstName,
+      lastName,
+      email,
+      phoneNumber,
+      imageUrl,
+      address: {
+        country,
+        city,
+        street,
+        streetNumber
+      }
+    }
+    try{
+      const createdUser = await userService.create(data)
+      console.log(createdUser);
+      setUsers(state => [...state,createdUser])
+    }catch(err){
+      console.log(err);
+    }
+  }
+
+ const onEdit = async() => {
+
+ }
+
   return (
     <>
           <Header />
       <main className="main">
         <section className="card users-container">
           <Search />
-          <UserList users = {users}/>
+          <UserList users = {users} onSave = {onSave} onEdit = {onEdit}/>
         </section>
         <Pagination />
       </main>

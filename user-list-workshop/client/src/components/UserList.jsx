@@ -5,10 +5,13 @@ import { UserDetails } from "./UserDetails";
 import * as userService from "../services/userService.js";
 import { CreateEdit } from "./CreateEdit.jsx";
 export const UserList = ({ 
-  users
+  users,
+  onSave,
+  onEdit
  }) => {
   const [selectedUser, setSelectedUser] = useState(null);
   const [showAddUser, setShowAddUser] = useState(null);
+  const [showEditUser, setShowEditUser ] = useState(null)
 
   const onInfoClick = async (userId) => {
     const user = await userService.getOne(userId);
@@ -16,36 +19,28 @@ export const UserList = ({
     setSelectedUser(user);
   };
 
+  const onEditClick = async (userId) => {
+    const user = await userService.getOne(userId)
+
+    setShowEditUser(user)
+  }
+
   const onAddShow = () => {
     setShowAddUser(true)
   }
 
-  const onSave = async (e,firstName,lastName,email,phoneNumber,imageUrl,country,city,street,streetNumber) => {
-    e.preventDefault()
-    const data = {
-      firstName,
-      lastName,
-      email,
-      phoneNumber,
-      imageUrl,
-      address: {
-        country,
-        city,
-        street,
-        streetNumber
-      }
-    }
-    await userService.create(data)
-  }
+
 
   const onClose = () => {
     setSelectedUser(null)
     setShowAddUser(null)
+    setShowEditUser(null)
   }
   return (
     <>
       {selectedUser && <UserDetails {...selectedUser} onClose={onClose}/>}
-      {showAddUser && <CreateEdit onClose={onClose} onSave = {onSave}/>}
+      {showAddUser && <CreateEdit onClose={onClose} onSubmit = {onSave}/>}
+      {showEditUser && <CreateEdit user={showEditUser} onClose={onClose} onSubmit = {onEdit}/>}
       {/* Table component */}
       <div className="table-wrapper">
         {/* Overlap components  */}
@@ -210,7 +205,7 @@ export const UserList = ({
           <tbody>
             {/* Table row component */}
             {users.map((e) => (
-              <User key={e._id} {...e} onInfoClick={onInfoClick} />
+              <User key={e._id} {...e} onInfoClick={onInfoClick} onEditClick={onEditClick} />
             ))}
           </tbody>
         </table>

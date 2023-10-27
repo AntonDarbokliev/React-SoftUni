@@ -2,7 +2,8 @@ import { useState } from "react"
 
 export const CreateEdit = ({
     onClose,
-    onSave
+    onSubmit,
+    user
 }) => {
     const [firstName, setFirstName] = useState('')
     const [lastName, setLastName] = useState('')
@@ -13,6 +14,8 @@ export const CreateEdit = ({
     const [city, setCity] = useState('')
     const [street, setStreet] = useState('')
     const [streetNumber, setStreetNumber] = useState('')
+
+    if(user) console.log(user);
 
     return (
         <>
@@ -32,7 +35,7 @@ export const CreateEdit = ({
               </svg>
             </button>
           </header>
-          <form onSubmit={(e) => onSave(e,firstName,lastName,email,phoneNumber,imageUrl,country,city,street,streetNumber)}>
+          <form onSubmit={(e) => onSubmit(e,firstName,lastName,email,phoneNumber,imageUrl,country,city,street,streetNumber)}>
             <div className="form-row">
               <div className="form-group">
                 <label htmlFor="firstName">First name</label>
