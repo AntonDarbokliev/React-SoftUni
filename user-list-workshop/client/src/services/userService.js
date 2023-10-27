@@ -30,3 +30,19 @@ export const create = async (data) => {
 
     return result.user
 }
+
+export const edit = async (userId,data) => {
+    const response = await fetch(`${baseUrl}/${userId}`,{
+        method : "PUT",
+        headers : {
+            'content-type' : 'application/json'
+        },
+        body : JSON.stringify(data),
+    });
+
+    const result = await response.json()
+
+    console.log(result);
+
+    return result.user
+}

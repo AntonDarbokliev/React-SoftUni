@@ -35,15 +35,35 @@ function App() {
     }
     try{
       const createdUser = await userService.create(data)
-      console.log(createdUser);
       setUsers(state => [...state,createdUser])
     }catch(err){
       console.log(err);
     }
   }
 
- const onEdit = async() => {
+ const onEdit = async(e,userId,firstName,lastName,email,phoneNumber,imageUrl,country,city,street,streetNumber) => {
+  e.preventDefault()
+  const data = {
+    firstName,
+    lastName,
+    email,
+    phoneNumber,
+    imageUrl,
+    address: {
+      country,
+      city,
+      street,
+      streetNumber
+    }
+  }
 
+  try{
+    const editedUser = await userService.edit(userId,data)
+    console.log('Edited user: ' + editedUser);
+    setUsers(state => state.map(e => e._id === userId ? editedUser : e))
+  }catch(err){
+    console.log(err);
+  }
  }
 
   return (

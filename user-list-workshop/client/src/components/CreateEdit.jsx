@@ -5,17 +5,15 @@ export const CreateEdit = ({
     onSubmit,
     user
 }) => {
-    const [firstName, setFirstName] = useState('')
-    const [lastName, setLastName] = useState('')
-    const [email, setEmail] = useState('')
-    const [phoneNumber, setPhoneNumber] = useState('')
-    const [imageUrl, setImageUrl] = useState('')
-    const [country, setCountry] = useState('')
-    const [city, setCity] = useState('')
-    const [street, setStreet] = useState('')
-    const [streetNumber, setStreetNumber] = useState('')
-
-    if(user) console.log(user);
+    const [firstName, setFirstName] = useState(user?.firstName)
+    const [lastName, setLastName] = useState(user?.lastName)
+    const [email, setEmail] = useState(user?.email)
+    const [phoneNumber, setPhoneNumber] = useState(user?.phoneNumber)
+    const [imageUrl, setImageUrl] = useState(user?.imageUrl)
+    const [country, setCountry] = useState(user?.address.country)
+    const [city, setCity] = useState(user?.address.city)
+    const [street, setStreet] = useState(user?.address.street)
+    const [streetNumber, setStreetNumber] = useState(user?.address.streetNumber)
 
     return (
         <>
@@ -35,7 +33,7 @@ export const CreateEdit = ({
               </svg>
             </button>
           </header>
-          <form onSubmit={(e) => onSubmit(e,firstName,lastName,email,phoneNumber,imageUrl,country,city,street,streetNumber)}>
+          <form onSubmit={(e) => onSubmit(e,user._id,firstName,lastName,email,phoneNumber,imageUrl,country,city,street,streetNumber)}>
             <div className="form-row">
               <div className="form-group">
                 <label htmlFor="firstName">First name</label>
@@ -43,9 +41,9 @@ export const CreateEdit = ({
                   <span><i className="fa-solid fa-user"></i></span>
                   <input id="firstName" name="firstName" type="text" value={firstName} onChange={(e) => setFirstName(e.target.value)}/>
                 </div>
-                <p className="form-error">
+                {/* <p className="form-error">
                   First name should be at least 3 characters long!
-                </p>
+                </p> */}
               </div>
               <div className="form-group">
                 <label htmlFor="lastName">Last name</label>
@@ -53,9 +51,9 @@ export const CreateEdit = ({
                   <span><i className="fa-solid fa-user"></i></span>
                   <input id="lastName" name="lastName" type="text" value={lastName} onChange={(e) => setLastName(e.target.value)}/>
                 </div>
-                <p className="form-error">
+                {/* <p className="form-error">
                   Last name should be at least 3 characters long!
-                </p>
+                </p> */}
               </div>
             </div>
       
@@ -66,7 +64,7 @@ export const CreateEdit = ({
                   <span><i className="fa-solid fa-envelope"></i></span>
                   <input id="email" name="email" type="text" value={email} onChange={(e) => setEmail(e.target.value)}/>
                 </div>
-                <p className="form-error">Email is not valid!</p>
+                {/* <p className="form-error">Email is not valid!</p> */}
               </div>
               <div className="form-group">
                 <label htmlFor="phoneNumber">Phone number</label>
@@ -74,7 +72,7 @@ export const CreateEdit = ({
                   <span><i className="fa-solid fa-phone"></i></span>
                   <input id="phoneNumber" name="phoneNumber" type="text" value={phoneNumber} onChange={(e) => setPhoneNumber(e.target.value)}/>
                 </div>
-                <p className="form-error">Phone number is not valid!</p>
+                {/* <p className="form-error">Phone number is not valid!</p> */}
               </div>
             </div>
       
@@ -84,7 +82,7 @@ export const CreateEdit = ({
                 <span><i className="fa-solid fa-image"></i></span>
                 <input id="imageUrl" name="imageUrl" type="text" value={imageUrl} onChange={(e) => setImageUrl(e.target.value)}/>
               </div>
-              <p className="form-error">ImageUrl is not valid!</p>
+              {/* <p className="form-error">ImageUrl is not valid!</p> */}
             </div>
       
             <div className="form-row">
@@ -94,9 +92,9 @@ export const CreateEdit = ({
                   <span><i className="fa-solid fa-map"></i></span>
                   <input id="country" name="country" type="text" value={country} onChange={(e) => setCountry(e.target.value)}/>
                 </div>
-                <p className="form-error">
+                {/* <p className="form-error">
                   Country should be at least 2 characters long!
-                </p>
+                </p> */}
               </div>
               <div className="form-group">
                 <label htmlFor="city">City</label>
@@ -104,9 +102,9 @@ export const CreateEdit = ({
                   <span><i className="fa-solid fa-city"></i></span>
                   <input id="city" name="city" type="text" value={city} onChange={(e) => setCity(e.target.value)}/>
                 </div>
-                <p className="form-error">
+                {/* <p className="form-error">
                   City should be at least 3 characters long!
-                </p>
+                </p> */}
               </div>
             </div>
       
@@ -117,9 +115,9 @@ export const CreateEdit = ({
                   <span><i className="fa-solid fa-map"></i></span>
                   <input id="street" name="street" type="text" value={street} onChange={(e) => setStreet(e.target.value)}/>
                 </div>
-                <p className="form-error">
+                {/* <p className="form-error">
                   Street should be at least 3 characters long! 
-                </p>
+                </p> */}
               </div>
               <div className="form-group">
                 <label htmlFor="streetNumber">Street number</label>
@@ -127,9 +125,9 @@ export const CreateEdit = ({
                   <span><i className="fa-solid fa-house-chimney"></i></span>
                   <input id="streetNumber" name="streetNumber" type="text"   value={streetNumber} onChange={(e) => setStreetNumber(e.target.value)}/>
                 </div>
-                <p className="form-error">
+                {/* <p className="form-error">
                   Street number should be a positive number!
-                </p>
+                </p> */}
               </div>
             </div>
             <div id="form-actions">
