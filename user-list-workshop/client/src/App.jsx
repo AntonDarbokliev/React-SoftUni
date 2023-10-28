@@ -39,6 +39,7 @@ function App() {
     }catch(err){
       console.log(err);
     }
+    
   }
 
  const onEdit = async(e,userId,firstName,lastName,email,phoneNumber,imageUrl,country,city,street,streetNumber) => {
@@ -66,13 +67,18 @@ function App() {
   }
  }
 
+  const onDelete = async (userId) => {
+    await userService.deleteUser(userId)
+    setUsers(state => state.filter(e => e._id !== userId))
+ }
+
   return (
     <>
           <Header />
       <main className="main">
         <section className="card users-container">
           <Search />
-          <UserList users = {users} onSave = {onSave} onEdit = {onEdit}/>
+          <UserList users = {users} onSave = {onSave} onEdit = {onEdit} onDelete={onDelete}/>
         </section>
         <Pagination />
       </main>

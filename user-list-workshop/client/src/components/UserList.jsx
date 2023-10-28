@@ -7,7 +7,8 @@ import { CreateEdit } from "./CreateEdit.jsx";
 export const UserList = ({ 
   users,
   onSave,
-  onEdit
+  onEdit,
+  onDelete
  }) => {
   const [selectedUser, setSelectedUser] = useState(null);
   const [showAddUser, setShowAddUser] = useState(null);
@@ -205,7 +206,7 @@ export const UserList = ({
           <tbody>
             {/* Table row component */}
             {users.map((e) => (
-              <User key={e._id} {...e} onInfoClick={onInfoClick} onEditClick={onEditClick} />
+              <User key={e._id} {...e} onInfoClick={onInfoClick} onEditClick={onEditClick} onDeleteClick={onDelete}/>
             ))}
           </tbody>
         </table>
