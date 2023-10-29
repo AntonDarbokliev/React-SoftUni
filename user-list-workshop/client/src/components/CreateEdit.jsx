@@ -5,15 +5,37 @@ export const CreateEdit = ({
     onSubmit,
     user
 }) => {
-    const [firstName, setFirstName] = useState(user?.firstName)
-    const [lastName, setLastName] = useState(user?.lastName)
-    const [email, setEmail] = useState(user?.email)
-    const [phoneNumber, setPhoneNumber] = useState(user?.phoneNumber)
-    const [imageUrl, setImageUrl] = useState(user?.imageUrl)
-    const [country, setCountry] = useState(user?.address.country)
-    const [city, setCity] = useState(user?.address.city)
-    const [street, setStreet] = useState(user?.address.street)
-    const [streetNumber, setStreetNumber] = useState(user?.address.streetNumber)
+    
+    
+    const [formValues, setFormValues] = useState({
+        firstName : user?.firstName,
+        lastName  : user?.lastName,
+        email : user?.email,
+        phoneNumber : user?.phoneNumber,
+        imageUrl  : user?.imageUrl,
+        country : user?.address.country,
+        city  : user?.address.city,
+        street  : user?.address.street,
+        streetNumber  : user?.address.streetNumber,
+    })
+
+    // const formChangeHandler = (e) => {
+    //   console.log('Change at: ' + e.target.name);
+    //   setFormValues(state => ({...state, [e.target.name] : e.target.value}))
+    // }
+
+    // const formValidate = (e) => {
+    //   const value = e.target.value
+    //   const errors = {}
+
+    //   if(e.target.name === 'firstName' && (value.length < 3 || value.length > 20 )){
+    //     errors.firstName = 'First name should be between 3 and 20 characters long'
+    //   }
+
+    //   if(e.target.name === 'lastName' && (value.length < 3 || value.length > 20 )){
+    //     errors.firstName = 'Last name should be between 3 and 20 characters long'
+    //   }
+    // }
 
     return (
         <>
@@ -33,13 +55,13 @@ export const CreateEdit = ({
               </svg>
             </button>
           </header>
-          <form onSubmit={(e) => onSubmit(e,firstName,lastName,email,phoneNumber,imageUrl,country,city,street,streetNumber,user._id)}>
+          <form onSubmit={(e) => onSubmit(e,user._id,{...formValues})}>
             <div className="form-row">
               <div className="form-group">
                 <label htmlFor="firstName">First name</label>
                 <div className="input-wrapper">
                   <span><i className="fa-solid fa-user"></i></span>
-                  <input id="firstName" name="firstName" type="text" value={firstName} onChange={(e) => setFirstName(e.target.value)}/>
+                  <input id="firstName" name="firstName" type="text" value={formValues.firstName} onChange={formChangeHandler}/>
                 </div>
                 {/* <p className="form-error">
                   First name should be at least 3 characters long!
@@ -49,7 +71,7 @@ export const CreateEdit = ({
                 <label htmlFor="lastName">Last name</label>
                 <div className="input-wrapper">
                   <span><i className="fa-solid fa-user"></i></span>
-                  <input id="lastName" name="lastName" type="text" value={lastName} onChange={(e) => setLastName(e.target.value)}/>
+                  <input id="lastName" name="lastName" type="text" value={formValues.lastName} onChange={formChangeHandler}/>
                 </div>
                 {/* <p className="form-error">
                   Last name should be at least 3 characters long!
@@ -62,7 +84,7 @@ export const CreateEdit = ({
                 <label htmlFor="email">Email</label>
                 <div className="input-wrapper">
                   <span><i className="fa-solid fa-envelope"></i></span>
-                  <input id="email" name="email" type="text" value={email} onChange={(e) => setEmail(e.target.value)}/>
+                  <input id="email" name="email" type="text"  value={formValues.email} onChange={formChangeHandler}/>
                 </div>
                 {/* <p className="form-error">Email is not valid!</p> */}
               </div>
@@ -70,7 +92,7 @@ export const CreateEdit = ({
                 <label htmlFor="phoneNumber">Phone number</label>
                 <div className="input-wrapper">
                   <span><i className="fa-solid fa-phone"></i></span>
-                  <input id="phoneNumber" name="phoneNumber" type="text" value={phoneNumber} onChange={(e) => setPhoneNumber(e.target.value)}/>
+                  <input id="phoneNumber" name="phoneNumber" type="text"  value={formValues.phoneNumber} onChange={formChangeHandler}/>
                 </div>
                 {/* <p className="form-error">Phone number is not valid!</p> */}
               </div>
@@ -80,7 +102,7 @@ export const CreateEdit = ({
               <label htmlFor="imageUrl">Image Url</label>
               <div className="input-wrapper">
                 <span><i className="fa-solid fa-image"></i></span>
-                <input id="imageUrl" name="imageUrl" type="text" value={imageUrl} onChange={(e) => setImageUrl(e.target.value)}/>
+                <input id="imageUrl" name="imageUrl" type="text"  value={formValues.imageUrl} onChange={formChangeHandler}/>
               </div>
               {/* <p className="form-error">ImageUrl is not valid!</p> */}
             </div>
@@ -90,7 +112,7 @@ export const CreateEdit = ({
                 <label htmlFor="country">Country</label>
                 <div className="input-wrapper">
                   <span><i className="fa-solid fa-map"></i></span>
-                  <input id="country" name="country" type="text" value={country} onChange={(e) => setCountry(e.target.value)}/>
+                  <input id="country" name="country" type="text"  value={formValues.country} onChange={formChangeHandler}/>
                 </div>
                 {/* <p className="form-error">
                   Country should be at least 2 characters long!
@@ -100,7 +122,7 @@ export const CreateEdit = ({
                 <label htmlFor="city">City</label>
                 <div className="input-wrapper">
                   <span><i className="fa-solid fa-city"></i></span>
-                  <input id="city" name="city" type="text" value={city} onChange={(e) => setCity(e.target.value)}/>
+                  <input id="city" name="city" type="text"  value={formValues.city} onChange={formChangeHandler}/>
                 </div>
                 {/* <p className="form-error">
                   City should be at least 3 characters long!
@@ -113,7 +135,7 @@ export const CreateEdit = ({
                 <label htmlFor="street">Street</label>
                 <div className="input-wrapper">
                   <span><i className="fa-solid fa-map"></i></span>
-                  <input id="street" name="street" type="text" value={street} onChange={(e) => setStreet(e.target.value)}/>
+                  <input id="street" name="street" type="text"  value={formValues.street} onChange={formChangeHandler}/>
                 </div>
                 {/* <p className="form-error">
                   Street should be at least 3 characters long! 
@@ -123,7 +145,7 @@ export const CreateEdit = ({
                 <label htmlFor="streetNumber">Street number</label>
                 <div className="input-wrapper">
                   <span><i className="fa-solid fa-house-chimney"></i></span>
-                  <input id="streetNumber" name="streetNumber" type="text"   value={streetNumber} onChange={(e) => setStreetNumber(e.target.value)}/>
+                  <input id="streetNumber" name="streetNumber" type="text" value={formValues.streetNumber} onChange={formChangeHandler}/>
                 </div>
                 {/* <p className="form-error">
                   Street number should be a positive number!
