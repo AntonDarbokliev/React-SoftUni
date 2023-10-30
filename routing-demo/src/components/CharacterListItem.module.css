@@ -1,0 +1,19 @@
+section {
+    margin-bottom: 500px;
+    border: solid;
+    border-width: 5px;
+    border-color: black;
+}
+
+.image {
+    float:inline-end;
+    margin-right: 300px;
+    margin-top: 50px;
+    border: solid red;
+}
+
+.charactersList li{
+    /* background-color: black; */
+    display: block;
+    font-size:xx-large;
+}
