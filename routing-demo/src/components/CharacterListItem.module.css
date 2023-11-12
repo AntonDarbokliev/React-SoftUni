@@ -17,3 +17,14 @@ section {
     display: block;
     font-size:xx-large;
 }
+
+.episodes {
+    font-size: x-large;
+    color: red;
+    text-decoration-line: none;
+}
+
+.episodesBtn {
+    margin-top: 30px;
+    margin-bottom: 30px;
+}

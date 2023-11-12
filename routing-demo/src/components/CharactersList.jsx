@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import { CharacterListItem } from "./CharacterListItem.jsx";
 
-const baseUrl = 'https://rickandmortyapi.com/api/character/'
+const baseUrl = 'https://rickandmortyapi.com/api/character'
 
 export const CharactersList = () => {
 const [characters, setCharacters] = useState([]);
